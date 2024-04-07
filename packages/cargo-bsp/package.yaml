@@ -1,0 +1,26 @@
+---
+name: cargo-bsp
+description: Build Server for cargo
+homepage: https://github.com/616b2f/dotnet-bsp
+licenses:
+  - Apache-2.0
+languages:
+  - Rust
+categories: []
+
+source:
+  # renovate:datasource=git-refs
+  id: pkg:github/cargo-bsp/cargo-bsp@d7fa0a0e6db12bdc31daf0be7dd6280e9ecc3442
+  build:
+    - target: unix
+      run: |
+        cargo build --release
+      bin: target/release/server
+    - target: win
+      run: |
+        Set-Location -Path .\mm0-rs
+        cargo build --release
+      bin: target/release/server.exe
+
+bin:
+  cargo-bsp: "{{source.build.bin}}"

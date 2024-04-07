@@ -19,11 +19,15 @@ jobs:
       should-release: ${{ steps.tag.outputs.should-release }}
 
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
-      - id: adjnoun
-        uses: mason-org/actions/adj-noun-generator@v1
+      - id: generate-word
+        name: Generate adj-noun word
+        shell: bash
+        run: |
+          WORD=$(echo "$GITHUB_ACTION_PATH/words/adjectives.txt" "$GITHUB_ACTION_PATH/words/nouns.txt" \
+            | xargs -n1 shuf -n 1 \
+            | head -c -1 \
+            | tr '\n' '-')
+          printf "word=%s" "$WORD" >> "$GITHUB_OUTPUT"
       - id: tag
         name: Get/create tag
         shell: bash
@@ -45,7 +49,7 @@ jobs:
         env:
           GITHUB_REF: ${{ github.ref }}
           GITHUB_REF_NAME: ${{ github.ref_name }}
-          ADJNOUN: ${{ steps.adjnoun.outputs.word }}
+          ADJNOUN: ${{ steps.generate-word.outputs.word }}
 
   release:
     needs: [tag]
