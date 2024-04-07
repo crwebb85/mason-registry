@@ -79,6 +79,9 @@ jobs:
 
           npm install -g ajv ajv-cli ajv-formats
 
+          echo "Packages: "
+          echo $PACKAGES
+
           <<<"$PACKAGES" tr ' ' '\n' | xargs -P10 -I{} ajv validate -d {} --spec=draft2020 -c ajv-formats -s $GITHUB_WORKSPACE/official-mason-registry/schemas/package.schema.json -r "$GITHUB_WORKSPACE/official-mason-registry/schemas/{components,enums}/**/*.json"
 
           for pkg in $PACKAGES; do
