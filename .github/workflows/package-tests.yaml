@@ -54,6 +54,10 @@ jobs:
       - name: List files in the repository
         run: |
           ls
+
+      - name: List files in the repository
+        run: |
+          ls $GITHUB_WORKSPACE/official-mason-registry
       # - shell: bash
       #   run: ./my-mason-registry/.github/workflows/validate-packages.sh
       #   env:
