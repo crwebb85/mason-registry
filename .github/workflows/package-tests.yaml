@@ -43,8 +43,8 @@ jobs:
           path: official-mason-registry
       - id: filelist
         uses: the-coding-turtle/ga-file-list@v0.2
-        with:
-          directory: ${{ github.action_path }}
+        # with:
+        #   directory: ${{ github.action_path }}
       - run: |
           echo "${{ steps.filelist.outpust.file_names }}"
       - shell: bash
