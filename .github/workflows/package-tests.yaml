@@ -27,7 +27,7 @@ jobs:
         uses: tj-actions/changed-files@v36
         with:
           files: |
-            packages/**/package.yaml
+            my-mason-registry/packages/**/package.yaml
 
   validate:
     name: Validate package definitions
