@@ -72,7 +72,7 @@ jobs:
 
           npm install -g ajv ajv-cli ajv-formats
 
-          <<<"$PACKAGES" tr ' ' '\n' | xargs -P10 -I{} ajv validate -d {} --spec=draft2020 -c ajv-formats -s official-mason-registry/schemas/package.schema.json -r 'official-mason-registry/schemas/{components,enums}/**/*.json'
+          <<<"$PACKAGES" tr ' ' '\n' | xargs -P10 -I{} ajv validate -d {} --spec=draft2020 -c ajv-formats -s $GITHUB_WORKSPACE/official-mason-registry/schemas/package.schema.json -r '$GITHUB_WORKSPACE/official-mason-registry/schemas/{components,enums}/**/*.json'
 
           for pkg in $PACKAGES; do
               # Check if CRLF characters exist in the file
