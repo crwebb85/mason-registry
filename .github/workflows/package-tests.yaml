@@ -43,7 +43,7 @@ jobs:
           path: official-mason-registry
       - uses: the-coding-turtle/ga-file-list@v0.2
         with:
-          directory: ${{ $GITHUB_ACTION_PATH }}
+          directory: ${{ GITHUB_ACTION_PATH }}
       - shell: bash
         run: $GITHUB_ACTION_PATH/my-mason-registry/validate-packages.sh
         env:
