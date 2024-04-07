@@ -38,7 +38,7 @@ jobs:
           path: my-mason-registry
       - uses: actions/checkout@v4
         with:
-          name: mason-org/mason-registry
+          repository: mason-org/mason-registry
           fetch-depth: 2
           path: official-mason-registry
       # - id: filelist
