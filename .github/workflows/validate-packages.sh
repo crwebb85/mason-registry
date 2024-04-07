@@ -19,7 +19,7 @@ for pkg in $PACKAGES; do
 
     # Ensure that the directory name corresponds with the package name
     pkg_name=$(sed -nE 's/name: (.+)$/\1/p' "$pkg")
-    if [[ "$pkg" != "packages/${pkg_name}/package.yaml" ]]; then
+    if [[ "$pkg" != "my-mason-registry/packages/${pkg_name}/package.yaml" ]]; then
         >&2 echo "::error file=$pkg::${pkg_name} name doesn't match directory name ($pkg)."
         exit 1
     else
