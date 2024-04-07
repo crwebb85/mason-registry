@@ -19,7 +19,9 @@ jobs:
       any_changed: ${{ steps.changed-packages.outputs.any_changed }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          path: my-mason-registry
       - name: Get changed package definitions
         id: changed-packages
         uses: tj-actions/changed-files@v36
