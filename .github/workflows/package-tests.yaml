@@ -34,8 +34,8 @@ jobs:
     if: ${{ github.event.inputs.packages || needs.package-diff.outputs.any_changed == 'true' }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          path: my-mason-registry
+        # with:
+        #   path: my-mason-registry
       - uses: actions/checkout@v4
         with:
           repository: mason-org/mason-registry
@@ -82,7 +82,7 @@ jobs:
           echo "Packages: "
           echo $PACKAGES
 
-          <<<"$PACKAGES" tr ' ' '\n' | xargs -P10 -I{} ajv validate -d my-mason-registry/{} --spec=draft2020 -c ajv-formats -s $GITHUB_WORKSPACE/official-mason-registry/schemas/package.schema.json -r "$GITHUB_WORKSPACE/official-mason-registry/schemas/{components,enums}/**/*.json"
+          <<<"$PACKAGES" tr ' ' '\n' | xargs -P10 -I{} ajv validate -d {} --spec=draft2020 -c ajv-formats -s $GITHUB_WORKSPACE/official-mason-registry/schemas/package.schema.json -r "$GITHUB_WORKSPACE/official-mason-registry/schemas/{components,enums}/**/*.json"
 
           for pkg in $PACKAGES; do
               # Check if CRLF characters exist in the file
@@ -93,7 +93,7 @@ jobs:
 
               # Ensure that the directory name corresponds with the package name
               pkg_name=$(sed -nE 's/name: (.+)$/\1/p' "$pkg")
-              if [[ "$pkg" != "my-mason-registry/packages/${pkg_name}/package.yaml" ]]; then
+              if [[ "$pkg" != "packages/${pkg_name}/package.yaml" ]]; then
                   >&2 echo "::error file=$pkg::${pkg_name} name doesn't match directory name ($pkg)."
                   exit 1
               else
