@@ -48,19 +48,19 @@ jobs:
       # - run: |
       #     echo "${{ steps.filelist.outputs.file_names }}"
 
-      - name: current path
-        run: |
-          pwd
-      - name: List files in the repository
-        run: |
-          ls -a
-
-      - name: List files in the repository
-        run: |
-          ls -a $GITHUB_WORKSPACE/official-mason-registry
-      - name: List files in the repository
-        run: |
-          ls -a $GITHUB_WORKSPACE/my-mason-registry
+      # - name: current path
+      #   run: |
+      #     pwd
+      # - name: List files in the repository
+      #   run: |
+      #     ls -a
+      #
+      # - name: List files in the repository
+      #   run: |
+      #     ls -a $GITHUB_WORKSPACE/official-mason-registry
+      # - name: List files in the repository
+      #   run: |
+      #     ls -a $GITHUB_WORKSPACE/my-mason-registry
       # - shell: bash
       #   run: ./my-mason-registry/.github/workflows/validate-packages.sh
       #   env:
@@ -79,7 +79,7 @@ jobs:
 
           npm install -g ajv ajv-cli ajv-formats
 
-          <<<"$PACKAGES" tr ' ' '\n' | xargs -P10 -I{} ajv validate -d {} --spec=draft2020 -c ajv-formats -s $GITHUB_WORKSPACE/official-mason-registry/schemas/package.schema.json -r '$GITHUB_WORKSPACE/official-mason-registry/schemas/{components,enums}/**/*.json'
+          <<<"$PACKAGES" tr ' ' '\n' | xargs -P10 -I{} ajv validate -d {} --spec=draft2020 -c ajv-formats -s $GITHUB_WORKSPACE/official-mason-registry/schemas/package.schema.json -r "$GITHUB_WORKSPACE/official-mason-registry/schemas/{components,enums}/**/*.json"
 
           for pkg in $PACKAGES; do
               # Check if CRLF characters exist in the file
