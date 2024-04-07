@@ -34,9 +34,18 @@ jobs:
     if: ${{ github.event.inputs.packages || needs.package-diff.outputs.any_changed == 'true' }}
     steps:
       - uses: actions/checkout@v3
-      - uses: mason-org/actions/validate-schema@v1
+      - uses: actions/checkout@v3
         with:
-          packages: ${{ github.event.inputs.packages || needs.package-diff.outputs.all_changed_files }}
+          name: mason-org/mason-registry
+          fetch-depth: 2
+          path: official-mason-registry
+      - shell: bash
+        run: $GITHUB_ACTION_PATH/validate-packages.sh
+        env:
+          PACKAGES: ${{ github.event.inputs.packages || needs.package-diff.outputs.all_changed_files }}
+      # - uses: mason-org/actions/validate-schema@v1
+      #   with:
+      #     packages: ${{ github.event.inputs.packages || needs.package-diff.outputs.all_changed_files }}
 
   tests:
     name: Test packages
@@ -104,6 +113,6 @@ jobs:
     name: Status check
     runs-on: ubuntu-latest
     needs: tests
-    if: 'failure() || cancelled()'
+    if: "failure() || cancelled()"
     steps:
       - run: exit 1
