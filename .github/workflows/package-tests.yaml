@@ -47,6 +47,10 @@ jobs:
       #     directory: ${{ github.action_path }}
       # - run: |
       #     echo "${{ steps.filelist.outputs.file_names }}"
+
+      - name: current path
+        run: |
+          pwd
       - name: List files in the repository
         run: |
           ls
