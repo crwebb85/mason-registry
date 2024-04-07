@@ -53,14 +53,14 @@ jobs:
           pwd
       - name: List files in the repository
         run: |
-          ls
+          ls -a
 
       - name: List files in the repository
         run: |
-          ls $GITHUB_WORKSPACE/official-mason-registry
+          ls -a $GITHUB_WORKSPACE/official-mason-registry
       - name: List files in the repository
         run: |
-          ls $GITHUB_WORKSPACE/my-mason-registry
+          ls -a $GITHUB_WORKSPACE/my-mason-registry
       # - shell: bash
       #   run: ./my-mason-registry/.github/workflows/validate-packages.sh
       #   env:
