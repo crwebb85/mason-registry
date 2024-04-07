@@ -51,7 +51,7 @@ jobs:
         run: |
           ls
       - shell: bash
-        run: $GITHUB_ACTION_PATH/my-mason-registry/validate-packages.sh
+        run: ./my-mason-registry/.github/workflows/validate-packages.sh
         env:
           PACKAGES: ${{ github.event.inputs.packages || needs.package-diff.outputs.all_changed_files }}
       # - uses: mason-org/actions/validate-schema@v1
