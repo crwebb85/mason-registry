@@ -1,5 +1,5 @@
 ---
-name: prettier
+name: prettier-plugin-xml
 description: Prettier XML extension is an opinionated code formatter.
 homepage: https://github.com/prettier/plugin-xml
 licenses:
