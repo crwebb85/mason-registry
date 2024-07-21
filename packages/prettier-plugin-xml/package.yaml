@@ -11,5 +11,6 @@ categories:
 
 source:
   id: pkg:npm/@prettier/plugin-xml@3.4.1
-# bin:
-#   prettier: npm:prettier
+
+bin:
+  prettier: npm:prettier
